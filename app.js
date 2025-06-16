@@ -6,11 +6,11 @@ const Navbar = () => (
 
 const Sidebar = () => (
   <aside className="sidebar">
-    <p>✨ Prioridades</p>
+    <p>✨ Priorities</p>
     <ul>
-      <li>Alta</li>
-      <li>Media</li>
-      <li>Baja</li>
+      <li>High</li>
+      <li>Medium</li>
+      <li>Low</li>
     </ul>
   </aside>
 );
@@ -21,11 +21,11 @@ const TaskItem = ({ task }) => (
 
 const TaskList = () => {
   const tasks = [
-    "Revisar inventario de collares",
-    "Empacar pedidos personalizados",
-    "Programar publicaciones en Instagram",
-    "Limpiar vitrinas y mostradores",
-    "Responder mensajes de clientes"
+    "Check inventory of necklaces",
+    "Pack personalized orders",
+    "Program instagram posts",
+    "Clean windows and shelves",
+    "Answer customers messages"
   ];
 
   return (
