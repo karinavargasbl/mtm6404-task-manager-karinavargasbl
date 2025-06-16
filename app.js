@@ -1,60 +1,60 @@
-const Navbar = () => (
-  <nav className="navbar">
-    <h1>💖 Jewelry Task Manager 💎</h1>
-  </nav>
-);
+const tasks = [
+  { text: "Check necklaces inventory", priority: "High" },
+  { text: "Pack personalized orders", priority: "Medium" },
+  { text: "Program instagram content", priority: "Low" },
+  { text: "Clean windows and shelves", priority: "High" },
+  { text: "Reply to customer messages", priority: "Medium" }
+];
 
-const Sidebar = () => (
-  <aside className="sidebar">
-    <p>✨ Priorities</p>
-    <ul>
-      <li>High</li>
-      <li>Medium</li>
-      <li>Low</li>
-    </ul>
-  </aside>
-);
-
-const TaskItem = ({ task }) => (
-  <li className="task-item">🔸 {task}</li>
-);
-
-const TaskList = () => {
-  const tasks = [
-    "Check inventory of necklaces",
-    "Pack personalized orders",
-    "Program instagram posts",
-    "Clean windows and shelves",
-    "Answer customers messages"
-  ];
-
+function NavBar() {
   return (
-    <ul className="task-list">
-      {tasks.map((task, index) => (
-        <TaskItem key={index} task={task} />
-      ))}
-    </ul>
+    <nav className="navbar">
+      <h2> Del Mar Gems </h2>
+    </nav>
   );
-};
+}
 
-const Footer = () => (
-  <footer className="footer">
-    <p>&copy; 2025 Del Mar Gems · Handmade with love 💕</p>
-  </footer>
-);
+function TaskItem({ task }) {
+  return (
+    <li className="task-item">
+      <div className="task-content">
+        <span>{task.text}</span>
+        <small className={`priority ${task.priority.toLowerCase()}`}>
+          Prioridad: {task.priority}
+        </small>
+      </div>
+      <div className="button-group">
+        <button className="status-btn completed">✅ Completed</button>
+        <button className="status-btn not-completed">❌ Not Completed</button>
+      </div>
+    </li>
+  );
+}
 
-const App = () => (
-  <div className="container">
-    <Navbar />
-    <div className="content">
-      <Sidebar />
-      <main>
-        <TaskList />
-      </main>
-    </div>
-    <Footer />
-  </div>
-);
+function Footer() {
+  return (
+    <footer className="footer">
+      <p>&copy; 2025 Del Mar Gems. All rights reserved.</p>
+    </footer>
+  );
+}
+
+function App() {
+  return (
+    <>
+      <NavBar />
+      <div className="container">
+        <h1>Task Manager</h1>
+        <ul className="task-list">
+          {tasks.map((task, index) => (
+            <TaskItem key={index} task={task} />
+          ))}
+        </ul>
+      </div>
+      <Footer />
+    </>
+  );
+}
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);
