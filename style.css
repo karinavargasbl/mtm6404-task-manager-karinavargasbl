@@ -75,7 +75,7 @@ main {
   flex: 1;
 }
 
-/* Responsive */
+
 @media (min-width: 768px) {
   .content {
     flex-direction: row;
