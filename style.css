@@ -33,6 +33,7 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   transition: box-shadow 0.2s ease-in-out;
 }
 
@@ -44,7 +45,8 @@ h1 {
 .task-content {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 1 1 60%;
+  margin-bottom: 0.5rem;
 }
 
 .priority {
@@ -53,21 +55,24 @@ h1 {
   margin-top: 0.25rem;
 }
 
-.priority.alta {
+.priority.high {
   color: #d32f2f;
 }
 
-.priority.media {
+.priority.medium {
   color: #f57c00;
 }
 
-.priority.baja {
+.priority.low {
   color: #388e3c;
 }
 
 .button-group {
   display: flex;
   gap: 0.5rem;
+  flex: 1 1 35%;
+  justify-content: flex-end;
+  flex-wrap: wrap;
 }
 
 .status-btn {
@@ -103,20 +108,25 @@ h1 {
   align-items: center;
   padding: 1rem 2rem;
   border-bottom: 3px solid #f48fb1;
+  flex-wrap: wrap;
 }
 
 .nav-links {
   list-style: none;
   display: flex;
   gap: 1.5rem;
+  margin: 0;
+  padding: 0;
 }
 
-
+.nav-links li {
+  font-weight: bold;
+  cursor: pointer;
+}
 
 .nav-links li:hover {
   color: #ad1457;
 }
-
 
 .footer {
   margin-top: 3rem;
@@ -126,4 +136,34 @@ h1 {
   color: #ad1457;
   font-size: 0.85rem;
   border-top: 2px solid #f8bbd0;
+}
+
+/* 🎯 Responsive styles */
+@media (max-width: 600px) {
+  .container {
+    padding: 1rem;
+    margin: 1rem;
+  }
+
+  .task-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .button-group {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

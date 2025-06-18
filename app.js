@@ -9,7 +9,11 @@ const tasks = [
 function NavBar() {
   return (
     <nav className="navbar">
-      <h2> Del Mar Gems </h2>
+      <h2>Del Mar Gems</h2>
+      <ul className="nav-links">
+        <li>Task</li>
+        <li>Status</li>
+      </ul>
     </nav>
   );
 }
