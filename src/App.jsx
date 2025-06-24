@@ -1,5 +1,6 @@
+
 import NavBar from './components/NavBar';
-import TaskItem from './components/TaskItem';
+import TaskBoard from './components/TaskBoard';
 import Footer from './components/Footer';
 
 const tasks = [
@@ -8,20 +9,12 @@ const tasks = [
   { text: "Program instagram content", priority: "Low", completed: true },
   { text: "Clean windows and shelves", priority: "High", completed: false },
   { text: "Reply to customer messages", priority: "Medium", completed: true },
-  { text: "Update website banner", priority: "Low", completed: false },
-  { text: "Order new packaging materials", priority: "High", completed: false },
-  { text: "Schedule photoshoot for new collection", priority: "Medium", completed: true },
-  { text: "Prepare monthly sales report", priority: "High", completed: false },
-  { text: "Respond to supplier emails", priority: "Low", completed: true }
+  { text: "Create TikTok draft", priority: "Low", completed: false },
+  { text: "Organize earrings section", priority: "Medium", completed: true },
+  { text: "Reorder popular items", priority: "High", completed: false },
+  { text: "Follow up with suppliers", priority: "Medium", completed: true },
+  { text: "Update store banner", priority: "Low", completed: false }
 ];
-
-
-const filter = 'All';
-
-const filteredTasks =
-  filter === 'All' ? tasks : tasks.filter(task => task.priority === filter);
-
-const completedCount = filteredTasks.filter(task => task.completed).length;
 
 function App() {
   return (
@@ -29,34 +22,13 @@ function App() {
       <NavBar>
         <li>Task</li>
         <li>Status</li>
+        <li>Reports</li>
       </NavBar>
 
       <div className="container">
         <h1>Task Manager</h1>
-
-        <div className="filter-section">
-          <label htmlFor="filter">Filter by priority:</label>
-          <select id="filter" value={filter} disabled>
-            <option value="All">All</option>
-            <option value="High">High</option>
-            <option value="Medium">Medium</option>
-            <option value="Low">Low</option>
-          </select>
-        </div>
-
-        <p className="counter">
-          Completed {completedCount} of {filteredTasks.length} tasks
-        </p>
-
-        <ul className="task-list">
-          {filteredTasks.length > 0 ? (
-            filteredTasks.map((task, index) => (
-              <TaskItem key={index} task={task} />
-            ))
-          ) : (
-            <p>No tasks match this filter.</p>
-          )}
-        </ul>
+        <div className="counter">Total Tasks: {tasks.length}</div>
+        <TaskBoard tasks={tasks} />
       </div>
 
       <Footer />
