@@ -25,6 +25,8 @@ h1 {
   font-size: 2rem;
 }
 
+
+
 .task-list {
   list-style: none;
   padding: 0;
@@ -126,15 +128,18 @@ h1 {
   font-weight: bold;
   font-size: 1.1rem;
   cursor: pointer;
-  padding: 0.4rem 0.6rem;
-  border-radius: 6px;
-  transition: background-color 0.2s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background-color: #f8d5f0;
+  color: #6a1b9a;
+  border: 2px solid #e0b3e0;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
-
 
 .nav-links li:hover {
   background-color: #f3e9fb;
   color: #9c27b0;
+  transform: scale(1.05);
 }
 
 .filter-section {
