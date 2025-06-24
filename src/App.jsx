@@ -1,4 +1,3 @@
-
 import NavBar from './components/NavBar';
 import TaskBoard from './components/TaskBoard';
 import Footer from './components/Footer';
@@ -26,7 +25,18 @@ function App() {
       </NavBar>
 
       <div className="container">
-        <h1>Task Manager</h1>
+        <h1>💎 Task Manager 💍</h1>
+
+        <div className="filter-section">
+          <label htmlFor="priority">Filter by priority:</label>
+          <select id="priority" name="priority" defaultValue="All" disabled>
+            <option value="All">All</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+        </div>
+
         <div className="counter">Total Tasks: {tasks.length}</div>
         <TaskBoard tasks={tasks} />
       </div>
@@ -37,3 +47,4 @@ function App() {
 }
 
 export default App;
+
