@@ -16,7 +16,7 @@ Reports: Takes tasks prop to generate statistics
 SearchTask & ToggleCompleted: Receive state and setter functions as props
 
 LocalStorage Integration:
-You implemented persistent data storage for:
+I implemented persistent data storage for:
 
 Tasks array
 Show completed filter state
