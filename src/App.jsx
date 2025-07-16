@@ -50,7 +50,7 @@ function App() {
 
   const togglePanel = () => setShowPanel(!showPanel);
 
-  useEffect(() => {
+  useEffect(() => {      /*punto 12*/
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);
 
@@ -71,7 +71,7 @@ useEffect(() => {
 }, [showPanel]);
 
 
-  const addTask = (text, priority) => {
+  const addTask = (text, priority) => {      /*punto 7*/
     const newTask = {
       id: Date.now(),
       text,
@@ -82,10 +82,10 @@ useEffect(() => {
   };
 
   const removeTask = (id) => {
-    setTasks(prev => prev.filter(task => task.id !== id));
+    setTasks(prev => prev.filter(task => task.id !== id)); /*function defined, punto 3,11*/ 
   };
 
-  const toggleComplete = (id) => {
+  const toggleComplete = (id) => {         /*punto 10*/
     setTasks(prev =>
       prev.map(task =>
         task.id === id ? { ...task, completed: !task.completed } : task
@@ -94,13 +94,13 @@ useEffect(() => {
   };
 
   const filteredTasks = tasks
-    .filter(task => (showCompleted ? task.completed : true))
+    .filter(task => (showCompleted ? task.completed : true))    /*punto 9*/
     .filter(task => task.text.toLowerCase().includes(searchTerm.toLowerCase()))
     .filter(task => priorityFilter === 'All' ? true : task.priority === priorityFilter)
-    .sort((a, b) => {
+    .sort((a, b) => {                        
       const priorityOrder = { High: 1, Medium: 2, Low: 3 };
       return priorityOrder[a.priority] - priorityOrder[b.priority];
-    });
+    });               /*punto 8*/
 
   const motivationalQuotes = [
     "Trust your sparkle ✨",
@@ -114,10 +114,10 @@ useEffect(() => {
 
   return (
     <>
-      <NavBar onNavClick={setActiveTab} />
+      <NavBar onNavClick={setActiveTab} />   
 
       <div className="container iteration-3-container">
-        {activeTab === 'Tasks' && (
+        {activeTab === 'Tasks' && (    /*punto 4*/
           <>
             <div className="form-section">
               <CreateTaskForm addTask={addTask} />
@@ -144,7 +144,7 @@ useEffect(() => {
               </div>
 
               <div className="task-meta-controls">
-                <ToggleCompleted showCompleted={showCompleted} setShowCompleted={setShowCompleted} />
+                <ToggleCompleted showCompleted={showCompleted} setShowCompleted={setShowCompleted} /> {/*punto 9*/}
                 <div className="counter" style={{ color: '#000' }}>Total Tasks: {filteredTasks.length}</div>
               </div>
 
@@ -174,9 +174,9 @@ useEffect(() => {
               <TaskBoard
   tasks={filteredTasks}
   onRemove={removeTask}
-  onToggleComplete={toggleComplete}
+  onToggleComplete={toggleComplete} /*functions defined that goes to taskitem on taskboard, punto 3, 10*/
 >
-  <h4 style={{ color: '#000' }}>Today's To Do</h4>
+  <h4 style={{ color: '#000' }}>Today's To Do</h4> {/*punto 2*/}
 </TaskBoard>
 
             </div>
