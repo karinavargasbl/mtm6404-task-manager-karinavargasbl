@@ -1,19 +1,20 @@
-
-function TaskItem({ task }) {
+function TaskItem({ task, onRemove, onToggleComplete }) {
   return (
     <li className="task-item">
       <div className="task-content">
-        <span>{task.text}</span>
+        <span>{task.text}</span><br></br>
         <small className={`priority ${task.priority.toLowerCase()}`}>
-          Prioridad: {task.priority}
+          Priority: {task.priority}
         </small>
       </div>
       <div className="button-group">
-        {task.completed ? (
-          <button className="status-btn completed">✅ Completed</button>
-        ) : (
-          <button className="status-btn not-completed">❌ Not Completed</button>
-        )}
+        <button
+          className={task.completed ? 'status-btn completed' : 'status-btn not-completed'}
+          onClick={() => onToggleComplete(task.id)}
+        >
+          {task.completed ? '✅ Completed' : '❌ Not Completed'}
+        </button>
+        <button className="status-btn" onClick={() => onRemove(task.id)}>🗑️ Delete</button>
       </div>
     </li>
   );
