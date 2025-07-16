@@ -1,3 +1,6 @@
+Student: Karina Del Mar
+ID: 90541140462
+
 For Iteration 2 of the Capstone Project "Task Manager for Del Mar Gems" 
                     GEM ORGANIZER
                 
@@ -33,3 +36,4 @@ Responsive Grid: Adapts to different screen sizes
 
 To Run:
 npm run dev
+
