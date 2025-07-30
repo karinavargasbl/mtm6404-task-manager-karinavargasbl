@@ -6,9 +6,9 @@ function TaskBoard({ tasks, onRemove, onToggleComplete, children }) {
 
   return (
     <section>
-      {children} {/* This renders whatever is passed inside <TaskBoard> ... </TaskBoard> PUNTO #2*/} 
+      {children} 
       <ul className="task-list">
-        {tasks.map(task => ( /*PUNTO 3*/
+        {tasks.map(task => ( 
           <TaskItem
             key={task.id}
             task={task}
