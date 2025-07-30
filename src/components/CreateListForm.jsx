@@ -14,7 +14,7 @@ function CreateListForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="create-list-form">
+    <form onSubmit={handleSubmit} className="create-list-form">   {/*PUNTO 8*/}
       <input
         type="text"
         placeholder="New list name"

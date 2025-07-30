@@ -1,5 +1,5 @@
 // src/App.jsx
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';   /*PUNTO 5*/
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import ListPage from './pages/ListPage';  // tu componente para listas
@@ -12,8 +12,8 @@ function App() {
 
   return (
     <>
-      <NavBar />
-      <Routes>
+      <NavBar />  
+      <Routes> 
         <Route path="/" element={<Navigate to={`/list/${activeListId}`} replace />} />
         <Route path="/list/:listId" element={<ListPage />} />
         <Route path="/reports" element={<Reports />} />

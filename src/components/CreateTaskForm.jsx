@@ -19,7 +19,7 @@ function CreateTaskForm({ addTask }) {
   <label className="input-group">
     <span className="input-label">Task Description</span>
     <textarea
-      placeholder="Describe your task here..."   /*punto 7*/
+      placeholder="Describe your task here..."   
       value={text}
       onChange={(e) => setText(e.target.value)}
       required

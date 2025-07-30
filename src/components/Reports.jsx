@@ -1,16 +1,35 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';  // Importa useNavigate
 import { TaskContext } from '../context/TaskContext';
 
 function Reports() {
   const { lists } = useContext(TaskContext);
+  const navigate = useNavigate(); 
+  
+  const handleBackToList = () => {
+    navigate('/list/1'); 
+  };
 
-  // Ejemplo simple: mostrar la cantidad de tareas por lista
   return (
-    <div style={{
+    <div
+      style={{
         padding: '1rem',
-        minHeight: 'calc(90vh - 80px)' // Ajusta 120px según la altura combinada de tu NavBar y Footer
-      }}>
+        minHeight: 'calc(90vh - 80px)', 
+      }}
+    >
       <h2>Task Reports</h2>
+
+      <button
+        onClick={handleBackToList}
+        style={{
+          marginBottom: '1rem',
+          padding: '0.5rem 1rem',
+          cursor: 'pointer',
+        }}
+      >
+        Back to Default List
+      </button>
+
       {lists.length === 0 && <p>No task lists available.</p>}
       <ul>
         {lists.map(list => (

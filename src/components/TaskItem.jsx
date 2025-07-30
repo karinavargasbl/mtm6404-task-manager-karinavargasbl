@@ -12,7 +12,7 @@ function TaskItem({ task, onRemove, onToggleComplete }) {
           className={task.completed ? 'status-btn completed' : 'status-btn not-completed'} /*shows state of completion*/
           onClick={() => onToggleComplete(task.id)}  /*punto 10*/
         >
-          {task.completed ? '✅ Completed' : '❌ Not Completed'} {/*calls ontoggleC from app.jsx to update, punto 3,*/}
+          {task.completed ? '✅ Completed' : '❌ Not Completed'} {/*PUNTO 4,*/}
         </button> 
         <button className="status-btn" onClick={() => onRemove(task.id)}>🗑️ Delete</button>   {/*punto11*/}
       </div>

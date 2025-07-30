@@ -43,7 +43,7 @@ function ListPage() {
   localStorage.setItem('priorityFilter', priorityFilter);
 }, [priorityFilter]);
 
-  const activeList = lists.find(list => list.id === activeListId);
+  const activeList = lists.find(list => list.id === activeListId); 
 
   const filteredTasks = activeList?.tasks
     .filter(task => (showCompleted ? task.completed : true))
@@ -88,7 +88,7 @@ function ListPage() {
         }}
       >
         Delete This List
-      </button>
+      </button>  
 
       <div style={{ margin: '1rem 0' }}>
         <ToggleCompleted showCompleted={showCompleted} setShowCompleted={setShowCompleted} />
@@ -117,7 +117,7 @@ function ListPage() {
         onRemove={removeTask}
         onToggleComplete={toggleComplete}
       >
-        <h4>Tasks</h4>
+        <h4>Tasks</h4>   {/*PUNTO 2*/}
       </TaskBoard>
     </div>
   );
