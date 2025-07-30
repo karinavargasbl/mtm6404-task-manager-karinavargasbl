@@ -117,7 +117,7 @@ function ListPage() {
         onRemove={removeTask}
         onToggleComplete={toggleComplete}
       >
-        <h4>Tasks</h4>   {/*PUNTO 2*/}
+        <h4>Tasks</h4>   
       </TaskBoard>
     </div>
   );
