@@ -1,39 +1,22 @@
 Student: Karina Del Mar
 ID: 90541140462
 
-For Iteration 2 of the Capstone Project "Task Manager for Del Mar Gems" 
-                    GEM ORGANIZER
-                
+Iteration 4 - Capstone project
 
-This is a static React task manager rebuilt with Vite. It includes three main components: NavBar, TaskItem, and Footer. I used props to pass task details to TaskItem and the children prop in NavBar for menu items. The tasks list is rendered using list rendering, and conditional rendering shows task status (completed or not). There’s also a filter dropdown and a counter, but these are static UI elements just to show how filtering would look. The app is responsive and styled with CSS. 
+GEM ORGANIZER - Task Manager
 
-Iteration 3
+In developing my React task manager, I focused on creating a user-friendly application that allows for efficient task management. I began by setting up the project using React, which provided a robust framework for building the user interface. To facilitate seamless navigation between different views, such as task lists and reports, I integrated React Router. This allowed me to define clear routes for each page, ensuring that users could easily access the features they needed.
 
-Key React Concepts Used:
-Props Implementation:
+To manage the application's state effectively, I utilized the Context API. This approach enabled me to create a global state for tasks, allowing any component within my application to access and modify task data without the complications of prop drilling. 
 
-NavBar: Receives onNavClick prop to handle tab switching and children prop for flexible content injection
-TaskBoard: Takes tasks, onRemove, and onToggleComplete props to manage task operations
-TaskItem: Receives task, onRemove, and onToggleComplete props for individual task management
-CreateTaskForm: Uses addTask prop to communicate with parent component
-Reports: Takes tasks prop to generate statistics
-SearchTask & ToggleCompleted: Receive state and setter functions as props
+Navbar: I designed the NavBar component to facilitate navigation, providing links to the task lists and reports. The reports page displays useful statistics, such as the total number of tasks across all lists, enhancing the user experience.
 
-LocalStorage Integration:
-I implemented persistent data storage for:
+In terms of functionality, I implemented features that allow users to create multiple task lists, each containing tasks with varying priority levels (High, Medium, Low). Users can easily toggle the completion status of tasks, providing a clear visual representation of their progress. To ensure that user data persists even after refreshing the page, I incorporated localStorage, which stores the task lists and their states.
 
-Tasks array
-Show completed filter state
-Priority filter selection
-Active tab state
-Panel visibility state
+For the visual design, I opted for a vibrant color scheme that includes gradients, such as blue and purple for the header and distinct colors for priority tags. This not only makes the application visually appealing but also enhances usability. I also ensured that the design is responsive, allowing users to access the application comfortably on both desktop and mobile devices.
 
-Layout Structure:
+To run my application, I simply need to execute the following commands in the terminal: npm run dev
+This launches the development server, and I can view my task manager live at localhost:3000.
 
-Vertical Stack Layout: Form section at top, task section below
-Horizontal Task Cards: Tasks displayed as individual cards
-Responsive Grid: Adapts to different screen sizes
 
-To Run:
-npm run dev
 

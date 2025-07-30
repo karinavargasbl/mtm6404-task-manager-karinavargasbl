@@ -1,37 +1,24 @@
-function Reports({ tasks }) {
-  const total = tasks.length;
-  const completed = tasks.filter(t => t.completed).length;
-  const incomplete = total - completed;
+import React, { useContext } from 'react';
+import { TaskContext } from '../context/TaskContext';
 
-  const countByPriority = (level) =>
-    tasks.filter(t => t.priority === level).length;
+function Reports() {
+  const { lists } = useContext(TaskContext);
 
+  // Ejemplo simple: mostrar la cantidad de tareas por lista
   return (
-    <div className="report-cards">
-      <div className="report-card total">
-        <h3>📊 Total Tasks</h3>
-        <p>{total}</p>
-      </div>
-      <div className="report-card completed">
-        <h3>✅ Completed</h3>
-        <p>{completed}</p>
-      </div>
-      <div className="report-card incomplete">
-        <h3>❌ Incomplete</h3>
-        <p>{incomplete}</p>
-      </div>
-      <div className="report-card high">
-        <h3>🔺 High Priority</h3>
-        <p>{countByPriority('High')}</p>
-      </div>
-      <div className="report-card medium">
-        <h3>🟠 Medium Priority</h3>
-        <p>{countByPriority('Medium')}</p>
-      </div>
-      <div className="report-card low">
-        <h3>🟢 Low Priority</h3>
-        <p>{countByPriority('Low')}</p>
-      </div>
+    <div style={{
+        padding: '1rem',
+        minHeight: 'calc(90vh - 80px)' // Ajusta 120px según la altura combinada de tu NavBar y Footer
+      }}>
+      <h2>Task Reports</h2>
+      {lists.length === 0 && <p>No task lists available.</p>}
+      <ul>
+        {lists.map(list => (
+          <li key={list.id}>
+            <strong>{list.name}</strong>: {list.tasks ? list.tasks.length : 0} tasks
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

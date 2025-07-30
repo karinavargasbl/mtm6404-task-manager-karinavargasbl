@@ -1,18 +1,19 @@
+// src/components/TaskBoard.jsx
 import TaskItem from './TaskItem';
 
 function TaskBoard({ tasks, onRemove, onToggleComplete, children }) {
-  if (!tasks.length) return <p>No tasks available</p>; /* punto 4 contional*/ 
+  if (!tasks.length) return <p>No tasks available</p>;
 
   return (
     <section>
-      {children} {/*where is showed the content sent from app.jsx*/}
+      {children}
       <ul className="task-list">
         {tasks.map(task => (
           <TaskItem
             key={task.id}
             task={task}
             onRemove={onRemove}
-            onToggleComplete={onToggleComplete} /*list rendering, punto 3, 11*/
+            onToggleComplete={onToggleComplete}
           />
         ))}
       </ul>
@@ -21,5 +22,6 @@ function TaskBoard({ tasks, onRemove, onToggleComplete, children }) {
 }
 
 export default TaskBoard;
+
 
 
