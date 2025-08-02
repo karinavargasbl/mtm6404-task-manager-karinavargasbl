@@ -1,19 +1,23 @@
-// src/App.jsx
-import { Routes, Route, Navigate } from 'react-router-dom';   /*PUNTO 5*/
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useContext } from 'react';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
-import ListPage from './pages/ListPage';  // tu componente para listas
-import Reports from './components/Reports';  // tu componente de reports
+import ListPage from './pages/ListPage';
+import Reports from './components/Reports';
+import { TaskContext } from './context/TaskContext';
 
 function App() {
-  // Si tienes activeListId en un contexto o estado global, úsalo aquí para redirigir
-  // Para este ejemplo, lo pongo fijo a 1, cámbialo según tu lógica
-  const activeListId = 1; 
+  const { activeListId } = useContext(TaskContext);
+
+  if (!activeListId) {
+    return <p>Loading...</p>; // O un spinner bonito
+  }
 
   return (
     <>
-      <NavBar />  
-      <Routes> 
+      <NavBar />
+      <Routes>
+        {/* Redirige a la lista activa real */}
         <Route path="/" element={<Navigate to={`/list/${activeListId}`} replace />} />
         <Route path="/list/:listId" element={<ListPage />} />
         <Route path="/reports" element={<Reports />} />
@@ -25,6 +29,4 @@ function App() {
 }
 
 export default App;
-
-
 

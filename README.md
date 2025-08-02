@@ -1,22 +1,42 @@
-Student: Karina Del Mar
+Developed by
+Karina Vargas
 ID: 90541140462
+Interactive Media Design Student
+Algonquin College – Toronto, Canada
+2025
 
-Iteration 4 - Capstone project
+Iteration 5 - Capstone Final Project
 
-GEM ORGANIZER - Task Manager
+GEM ORGANIZER - 📋 Task Manager App
+A modern, responsive web application built with React that lets users create and manage multiple task lists, sort tasks by priority, and sync everything with Firestore, including offline persistence. This project meets the full requirements of a Progressive Web App (PWA) and was developed for an advanced front-end development course.
 
-In developing my React task manager, I focused on creating a user-friendly application that allows for efficient task management. I began by setting up the project using React, which provided a robust framework for building the user interface. To facilitate seamless navigation between different views, such as task lists and reports, I integrated React Router. This allowed me to define clear routes for each page, ensuring that users could easily access the features they needed.
+Main Features
 
-To manage the application's state effectively, I utilized the Context API. This approach enabled me to create a global state for tasks, allowing any component within my application to access and modify task data without the complications of prop drilling. 
+This React-based Task Manager application allows users to create and manage multiple task lists with ease. Each list can contain tasks that include priority levels—High, Medium, or Low—and can be marked as completed or incomplete. Users can toggle the view to show only completed tasks and sort tasks by their priority. The app includes seamless navigation between lists using React Router and maintains consistent state across components using the Context API. Data is stored in real time using Firebase Firestore, and offline persistence ensures the app remains functional without an internet connection. The user interface is responsive and visually modern, adapting smoothly to all screen sizes and devices.
 
-Navbar: I designed the NavBar component to facilitate navigation, providing links to the task lists and reports. The reports page displays useful statistics, such as the total number of tasks across all lists, enhancing the user experience.
+🛠️ Technologies Used
 
-In terms of functionality, I implemented features that allow users to create multiple task lists, each containing tasks with varying priority levels (High, Medium, Low). Users can easily toggle the completion status of tasks, providing a clear visual representation of their progress. To ensure that user data persists even after refreshing the page, I incorporated localStorage, which stores the task lists and their states.
+React
+React Router
+Firebase Firestore
+Context API
+Vite
+HTML5, CSS3
 
-For the visual design, I opted for a vibrant color scheme that includes gradients, such as blue and purple for the header and distinct colors for priority tags. This not only makes the application visually appealing but also enhances usability. I also ensured that the design is responsive, allowing users to access the application comfortably on both desktop and mobile devices.
+☁️ How Firestore is Used in the App
+This application integrates Firebase’s Cloud Firestore to store and manage all user data, including task lists and individual tasks. Here's how Firestore is used:
 
-To run my application, I simply need to execute the following commands in the terminal: npm run dev
-This launches the development server, and I can view my task manager live at localhost:3000.
+Task Lists Storage: All task lists are saved inside the lists collection in Firestore. Each list document contains metadata like the list's name and the showCompleted flag which determines whether completed tasks should be shown or hidden.
 
+Tasks per List: Each task is stored as a document inside a tasks subcollection under its respective list. Each task document includes a description, priority level, and a completed boolean status.
 
+Real-Time Sync: The app uses Firestore's onSnapshot listener to sync changes in real-time. Whenever a user adds, updates, or deletes a task or a list, the UI updates instantly without the need for manual refresh.
 
+Offline Support: Firestore supports offline persistence automatically. This means users can continue to add or modify tasks without an internet connection, and those changes will sync automatically once the connection is restored.
+
+Run the Development Server
+
+Start the Vite development server by running:
+npm run dev
+
+This will launch the app locally. Open your browser and go to http://localhost:5173

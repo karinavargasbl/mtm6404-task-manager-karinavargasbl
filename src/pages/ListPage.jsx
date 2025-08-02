@@ -29,15 +29,23 @@ function ListPage() {
 });
 
   const [searchTerm, setSearchTerm] = useState('');
+  console.log("LISTS:", lists);
+console.log("activeListId:", activeListId);
+
 
   useEffect(() => {
-    const idNum = parseInt(listId);
-    if (!lists.find(l => l.id === idNum)) {
-      navigate('/');
-    } else {
-      setActiveListId(idNum);
-    }
-  }, [listId, lists, navigate, setActiveListId]);
+  if (lists.length === 0) return; // Espera a que carguen las listas
+
+  const foundList = lists.find(l => l.id === listId);
+  if (!foundList) {
+    navigate('/');
+  } else {
+    setActiveListId(listId);
+  }
+}, [listId, lists, navigate, setActiveListId]);
+
+
+
 
   useEffect(() => {
   localStorage.setItem('priorityFilter', priorityFilter);

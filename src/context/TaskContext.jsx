@@ -1,111 +1,180 @@
-// src/context/TaskContext.jsx
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useRef } from 'react';
+import {
+  collection,
+  doc,
+  updateDoc,
+  setDoc,
+  deleteDoc,
+  onSnapshot,
+} from 'firebase/firestore';
+import { db } from '../firebaseConfig';
 
 export const TaskContext = createContext();
 
 export function TaskProvider({ children }) {
-  // Estado listas: array de { id, name, tasks: [...] }
-  const [lists, setLists] = useState(() => {
-    const stored = localStorage.getItem('lists');
-    return stored ? JSON.parse(stored) : [
-      {
-        id: 1,
-        name: 'Default List',
-        tasks: [
-          { id: 1, text: "Check necklaces inventory", priority: "High", completed: true },
-          { id: 2, text: "Pack personalized orders", priority: "Medium", completed: false },
-          { id: 3, text: "Program Instagram content", priority: "Low", completed: true },
-        ]
+  const [lists, setLists] = useState([]);
+  const [activeListId, setActiveListId] = useState(null);
+  const [showCompleted, setShowCompleted] = useState(false);
+
+  // Ref para controlar actualización y evitar loops
+  const showCompletedFromFirestore = useRef(false);
+  const updatingShowCompleted = useRef(false);
+
+  // Listener general para listas (sin showCompleted)
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, "lists"), (snapshot) => {
+      const loadedLists = snapshot.docs.map(doc => {
+        const data = doc.data();
+        return {
+          id: doc.id,
+          name: data.name,
+          tasks: data.tasks || [],
+        };
+      });
+
+      setLists(loadedLists);
+
+      if (!activeListId && loadedLists.length > 0) {
+        setActiveListId(loadedLists[0].id);
       }
-    ];
-  });
+    });
 
-  const [activeListId, setActiveListId] = useState(() => {
-    const stored = localStorage.getItem('activeListId');
-    return stored ? JSON.parse(stored) : lists[0].id;
-  });
-
-  const [showCompleted, setShowCompleted] = useState(() => {
-    const stored = localStorage.getItem('showCompleted');
-    return stored ? JSON.parse(stored) : false;
-  });
-
-  useEffect(() => {
-    localStorage.setItem('lists', JSON.stringify(lists));
-  }, [lists]);
-
-  useEffect(() => {
-    localStorage.setItem('activeListId', JSON.stringify(activeListId));
+    return () => unsubscribe();
   }, [activeListId]);
 
+  // Listener para showCompleted del documento activo
   useEffect(() => {
-    localStorage.setItem('showCompleted', JSON.stringify(showCompleted));
-  }, [showCompleted]);
+    if (!activeListId) return;
 
-  const addList = (name) => {
-    const newList = {
-      id: Date.now(),
-      name,
-      tasks: [],
-    };
-    setLists(prev => [...prev, newList]);
-    setActiveListId(newList.id);
-  };
-
-  const removeList = (id) => {
-    setLists(prev => prev.filter(list => list.id !== id));
-    if (id === activeListId) {
-      if (lists.length > 1) {
-        const otherList = lists.find(list => list.id !== id);
-        setActiveListId(otherList.id);
-      } else {
-        setActiveListId(null);
+    const listDocRef = doc(db, "lists", activeListId);
+    const unsubscribe = onSnapshot(listDocRef, (docSnapshot) => {
+      if (docSnapshot.exists()) {
+        const data = docSnapshot.data();
+        if (typeof data.showCompleted === "boolean") {
+          // Solo actualiza si el valor de Firestore difiere del local para evitar renderizado infinito
+          if (data.showCompleted !== showCompletedFromFirestore.current) {
+            showCompletedFromFirestore.current = data.showCompleted;
+            // Solo actualiza el estado local si es diferente para evitar loops
+            setShowCompleted(data.showCompleted);
+          }
+        } else {
+          showCompletedFromFirestore.current = false;
+          setShowCompleted(false);
+        }
       }
+    });
+
+    return () => unsubscribe();
+  }, [activeListId]);
+
+  // Cuando showCompleted cambia localmente, actualiza Firestore (pero evita loops)
+  useEffect(() => {
+    // Si el cambio fue disparado desde Firestore, no actualizar (evita loops)
+    if (showCompleted === showCompletedFromFirestore.current) {
+      return;
+    }
+
+    const updateShowCompletedInFirestore = async () => {
+      if (!activeListId) return;
+      updatingShowCompleted.current = true;
+      try {
+        const listDocRef = doc(db, "lists", activeListId);
+        await updateDoc(listDocRef, { showCompleted });
+        showCompletedFromFirestore.current = showCompleted;
+      } catch (error) {
+        console.error("Error updating showCompleted:", error);
+      } finally {
+        updatingShowCompleted.current = false;
+      }
+    };
+
+    updateShowCompletedInFirestore();
+  }, [showCompleted, activeListId]);
+
+  // Resto de funciones: addList, removeList, addTask, removeTask, toggleComplete
+  // Igual que antes, excepto que addList ahora crea showCompleted: false
+
+  const addList = async (name) => {
+    try {
+      const newListId = Date.now().toString();
+
+      const newList = {
+        name,
+        tasks: [],
+        showCompleted: false,
+      };
+
+      await setDoc(doc(db, "lists", newListId), newList);
+      setActiveListId(newListId);
+    } catch (error) {
+      console.error("Error adding list:", error);
     }
   };
 
-  const addTask = (text, priority) => {
-    setLists(prev =>
-      prev.map(list => {
-        if (list.id === activeListId) {
-          const newTask = {
-            id: Date.now(),
-            text,
-            priority,
-            completed: false,
-          };
-          return { ...list, tasks: [...list.tasks, newTask] };
+  const removeList = async (id) => {
+    try {
+      await deleteDoc(doc(db, "lists", id));
+      if (id === activeListId) {
+        if (lists.length > 1) {
+          const otherList = lists.find(list => list.id !== id);
+          if (otherList) setActiveListId(otherList.id);
+        } else {
+          setActiveListId(null);
         }
-        return list;
-      })
-    );
+      }
+    } catch (error) {
+      console.error("Error removing list:", error);
+    }
   };
 
-  const removeTask = (taskId) => {
-    setLists(prev =>
-      prev.map(list => {
-        if (list.id === activeListId) {
-          return { ...list, tasks: list.tasks.filter(task => task.id !== taskId) };
-        }
-        return list;
-      })
-    );
+  const addTask = async (text, priority) => {
+    try {
+      if (!activeListId) return;
+      const listDocRef = doc(db, "lists", activeListId);
+      const list = lists.find(l => l.id === activeListId);
+      if (!list) return;
+
+      const newTask = {
+        id: Date.now().toString(),
+        text,
+        priority,
+        completed: false,
+      };
+      const updatedTasks = [...(list.tasks || []), newTask];
+      await updateDoc(listDocRef, { tasks: updatedTasks });
+    } catch (error) {
+      console.error("Error adding task:", error);
+    }
   };
 
-  const toggleComplete = (taskId) => {
-    setLists(prev =>
-      prev.map(list => {
-        if (list.id === activeListId) {
-          return {
-            ...list,
-            tasks: list.tasks.map(task =>
-              task.id === taskId ? { ...task, completed: !task.completed } : task
-            )
-          };
-        }
-        return list;
-      })
-    );
+  const removeTask = async (taskId) => {
+    try {
+      if (!activeListId) return;
+      const listDocRef = doc(db, "lists", activeListId);
+      const list = lists.find(l => l.id === activeListId);
+      if (!list) return;
+
+      const updatedTasks = list.tasks.filter(task => task.id !== taskId);
+      await updateDoc(listDocRef, { tasks: updatedTasks });
+    } catch (error) {
+      console.error("Error removing task:", error);
+    }
+  };
+
+  const toggleComplete = async (taskId) => {
+    try {
+      if (!activeListId) return;
+      const listDocRef = doc(db, "lists", activeListId);
+      const list = lists.find(l => l.id === activeListId);
+      if (!list) return;
+
+      const updatedTasks = list.tasks.map(task =>
+        task.id === taskId ? { ...task, completed: !task.completed } : task
+      );
+      await updateDoc(listDocRef, { tasks: updatedTasks });
+    } catch (error) {
+      console.error("Error toggling task completion:", error);
+    }
   };
 
   const activeList = lists.find(list => list.id === activeListId);
