@@ -40,3 +40,9 @@ Start the Vite development server by running:
 npm run dev
 
 This will launch the app locally. Open your browser and go to http://localhost:5173
+
+To start the deploy to firebase run these commands:
+npm run build
+then
+firebase deploy
+This will open the project hosting on firebase.
