@@ -1,6 +1,10 @@
 // src/firebaseConfig.js
 import { initializeApp } from "firebase/app";
-import { getFirestore, enableIndexedDbPersistence } from "firebase/firestore";
+import {
+  initializeFirestore,
+  persistentLocalCache,
+  persistentMultipleTabManager
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBjzvAr8HYdhOi0PhRVgPH0UlEcZs1eg7Q",
@@ -14,16 +18,11 @@ const firebaseConfig = {
 // Inicializa Firebase
 const app = initializeApp(firebaseConfig);
 
-// Inicializa Firestore
-const db = getFirestore(app);
-
-// Habilita persistencia offline en Firestore
-enableIndexedDbPersistence(db).catch((err) => {
-  if (err.code === "failed-precondition") {
-    console.log("Persistencia falló: varias pestañas abiertas.");
-  } else if (err.code === "unimplemented") {
-    console.log("Persistencia no soportada por el navegador.");
-  }
+// Inicializa Firestore con persistencia local
+const db = initializeFirestore(app, {
+  localCache: persistentLocalCache({
+    tabManager: persistentMultipleTabManager() // soporta múltiples pestañas
+  })
 });
 
 export { db };

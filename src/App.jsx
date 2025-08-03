@@ -5,6 +5,8 @@ import Footer from './components/Footer';
 import ListPage from './pages/ListPage';
 import Reports from './components/Reports';
 import { TaskContext } from './context/TaskContext';
+import NetworkStatus from './components/NetworkStatus'; // Ajusta la ruta según donde pongas el archivo
+
 
 function App() {
   const { activeListId } = useContext(TaskContext);
@@ -15,7 +17,8 @@ function App() {
 
   return (
     <>
-      <NavBar />
+    <NetworkStatus />
+      <NavBar/>
       <Routes>
         {/* Redirige a la lista activa real */}
         <Route path="/" element={<Navigate to={`/list/${activeListId}`} replace />} />

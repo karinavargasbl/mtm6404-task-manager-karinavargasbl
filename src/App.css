@@ -8,7 +8,7 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;}
 h1{font-size:2.5rem;font-weight:700;background:linear-gradient(135deg,#ffd700,#a55eea,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center;margin-bottom:2rem;text-shadow:0 0 10px rgba(255,215,0,0.3);}
 
 /* Navbar */
-.navbar{background:linear-gradient(135deg,#e6f7ff,#b57edc);border-bottom:1px solid rgba(165,94,234,0.3);box-shadow:0 8px 32px rgba(124,67,255,0.3);backdrop-filter:blur(10px);padding:1rem 2rem;position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;}
+.navbar{background:linear-gradient(135deg,#e6f7ff,#b57edc);border-bottom:1px solid rgba(165,94,234,0.3);box-shadow:0 8px 32px rgba(124,67,255,0.3);backdrop-filter:blur(10px);padding:1rem 2rem;position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-top: 1.5rem;}
 .navbar h2{font-size:1.4rem;color:#5b3b7a;font-weight:500;font-style:italic;opacity:0.9;}
 .nav-links{display:flex;gap:0.5rem;list-style:none;}
 .nav-links li{background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:#fff;padding:0.75rem 1.5rem;border-radius:25px;font-weight:600;cursor:pointer;transition:transform 0.3s ease,box-shadow 0.3s ease;border:1px solid rgba(59,130,246,0.3);position:relative;overflow:hidden;}
