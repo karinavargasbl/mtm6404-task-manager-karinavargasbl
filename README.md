@@ -1,38 +1,48 @@
-Developed by
-Karina Vargas
+Developed by Karina Vargas
 ID: 90541140462
 Interactive Media Design Student
-Algonquin College – Toronto, Canada
-2025
+Algonquin College – Toronto, Canada | 2025
 
 Iteration 5 - Capstone Final Project
-
 GEM ORGANIZER - 📋 Task Manager App
-A modern, responsive web application built with React that lets users create and manage multiple task lists, sort tasks by priority, and sync everything with Firestore, including offline persistence. This project meets the full requirements of a Progressive Web App (PWA) and was developed for an advanced front-end development course.
+A modern, fully responsive web application designed to help users stay organized by creating and managing multiple task lists. Built using React, the app enables sorting tasks by priority, toggling completed tasks, and ensures seamless real-time syncing with Firebase’s Firestore database, including offline support. Designed to meet all the functional and technical requirements of a Progressive Web App (PWA), this project was created for an advanced front-end development course focused on modern JavaScript frameworks and cloud integration.
 
 Main Features
+This feature-rich Task Manager leverages the power of React to deliver an intuitive and dynamic user experience. Users can:
 
-This React-based Task Manager application allows users to create and manage multiple task lists with ease. Each list can contain tasks that include priority levels—High, Medium, or Low—and can be marked as completed or incomplete. Users can toggle the view to show only completed tasks and sort tasks by their priority. The app includes seamless navigation between lists using React Router and maintains consistent state across components using the Context API. Data is stored in real time using Firebase Firestore, and offline persistence ensures the app remains functional without an internet connection. The user interface is responsive and visually modern, adapting smoothly to all screen sizes and devices.
+Create unlimited task lists.
+Add, delete, and update tasks with associated priority levels (High, Medium, Low).
+Mark tasks as complete or incomplete.
+Toggle views to show only completed or active tasks.
+Sort tasks by priority in real-time.
+Navigate between multiple task lists using React Router, ensuring smooth transitions without reloading the page.
+Persist state and manage shared data across components efficiently using the Context API.
+Enjoy full offline functionality with Firestore’s offline persistence, making the app usable without an internet connection.
+The app’s responsive layout ensures accessibility across all screen sizes—from mobile phones to desktop monitors—delivering a clean and modern user interface.
 
 🛠️ Technologies Used
+React: A powerful JavaScript library used for building user interfaces. React was used to structure the app into reusable components, manage state, and handle dynamic updates without refreshing the page.
 
-React
-React Router
-Firebase Firestore
-Context API
-Vite
-HTML5, CSS3
+React Router: Enables seamless client-side routing. It allows users to switch between task lists and different views without full-page reloads, preserving the single-page application (SPA) experience.
+
+Firebase & Firestore: Firebase serves as the backend platform, while Cloud Firestore is used as the real-time NoSQL database. Together, they provide fast data access, automatic sync between devices, and strong integration with React.
+
+Context API: A built-in React feature used for managing and sharing global state (like current tasks and lists) across the entire application without prop drilling.
+
+Vite: A modern front-end build tool that offers faster development and optimized builds. Vite was used to scaffold and run the app locally with near-instant reloads.
+
+HTML5 & CSS3: Used to build the app’s structure and style. The app incorporates responsive design principles, flexbox/grid layouts, and modern CSS techniques to ensure a polished look and feel across devices.
 
 ☁️ How Firestore is Used in the App
-This application integrates Firebase’s Cloud Firestore to store and manage all user data, including task lists and individual tasks. Here's how Firestore is used:
+This application fully integrates Firebase’s Cloud Firestore to manage and persist user data efficiently:
 
-Task Lists Storage: All task lists are saved inside the lists collection in Firestore. Each list document contains metadata like the list's name and the showCompleted flag which determines whether completed tasks should be shown or hidden.
+Task Lists Storage: Each user-created task list is saved as a document inside the lists collection. Metadata such as the list name and the showCompleted flag is included in each document to support UI filtering and display logic.
 
-Tasks per List: Each task is stored as a document inside a tasks subcollection under its respective list. Each task document includes a description, priority level, and a completed boolean status.
+Tasks per List: Every list contains a tasks subcollection. Each task within it is stored as an individual document containing fields for task description, priority (High/Medium/Low), and completion status (completed boolean).
 
-Real-Time Sync: The app uses Firestore's onSnapshot listener to sync changes in real-time. Whenever a user adds, updates, or deletes a task or a list, the UI updates instantly without the need for manual refresh.
+Real-Time Synchronization: The app listens for real-time updates using Firestore’s onSnapshot method. Any additions, edits, or deletions to tasks or lists are instantly reflected in the UI, ensuring a seamless user experience.
 
-Offline Support: Firestore supports offline persistence automatically. This means users can continue to add or modify tasks without an internet connection, and those changes will sync automatically once the connection is restored.
+Offline Support: Firestore automatically enables offline persistence. Users can continue working on their tasks without an internet connection—any changes are stored locally and synchronized once connectivity is restored.
 
 Run the Development Server
 
