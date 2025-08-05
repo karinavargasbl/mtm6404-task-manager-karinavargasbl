@@ -7,7 +7,7 @@
 
 ---
 
-## 🧩 Project Overview
+##  Project Overview
 
 GEM Organizer is a modern, fully responsive web application designed to help users stay organized by creating and managing multiple task lists. Built using **React**, the app enables sorting tasks by priority, toggling completed tasks, and ensures seamless real-time syncing with **Firebase’s Firestore** database, including offline support.
 
@@ -15,7 +15,7 @@ This project meets all the functional and technical requirements of a **Progress
 
 ---
 
-## ✨ Main Features
+##  Main Features
 
 This feature-rich Task Manager leverages the power of React to deliver an intuitive and dynamic user experience. Users can:
 
@@ -31,7 +31,7 @@ This feature-rich Task Manager leverages the power of React to deliver an intuit
 
 ---
 
-## 🛠️ Technologies Used
+##  Technologies Used
 
 - **React**  
   A powerful JavaScript library used for building component-based user interfaces. React was used to structure the app into reusable components, manage state, and render changes dynamically without reloading the page.
