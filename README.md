@@ -1,38 +1,80 @@
-Developed by
-Karina Vargas
-ID: 90541140462
-Interactive Media Design Student
-Algonquin College – Toronto, Canada
-2025
+# GEM ORGANIZER - 📋 Task Manager App  
+**Iteration 5 – Capstone Final Project**  
+**Developed by Karina Vargas**  
+**ID:** 90541140462  
+**Interactive Media Design Student**  
+**Algonquin College – Toronto, Canada | 2025**
 
-Iteration 5 - Capstone Final Project
+---
 
-GEM ORGANIZER - 📋 Task Manager App
-A modern, responsive web application built with React that lets users create and manage multiple task lists, sort tasks by priority, and sync everything with Firestore, including offline persistence. This project meets the full requirements of a Progressive Web App (PWA) and was developed for an advanced front-end development course.
+##  Project Overview
 
-Main Features
+GEM Organizer is a modern, fully responsive web application designed to help users stay organized by creating and managing multiple task lists. Built using **React**, the app enables sorting tasks by priority, toggling completed tasks, and ensures seamless real-time syncing with **Firebase’s Firestore** database, including offline support.
 
-This React-based Task Manager application allows users to create and manage multiple task lists with ease. Each list can contain tasks that include priority levels—High, Medium, or Low—and can be marked as completed or incomplete. Users can toggle the view to show only completed tasks and sort tasks by their priority. The app includes seamless navigation between lists using React Router and maintains consistent state across components using the Context API. Data is stored in real time using Firebase Firestore, and offline persistence ensures the app remains functional without an internet connection. The user interface is responsive and visually modern, adapting smoothly to all screen sizes and devices.
+This project meets all the functional and technical requirements of a **Progressive Web App (PWA)** and was developed for an advanced front-end development course focused on **modern JavaScript frameworks** and **cloud integration**.
 
-🛠️ Technologies Used
+---
 
-React
-React Router
-Firebase Firestore
-Context API
-Vite
-HTML5, CSS3
+##  Main Features
 
-☁️ How Firestore is Used in the App
-This application integrates Firebase’s Cloud Firestore to store and manage all user data, including task lists and individual tasks. Here's how Firestore is used:
+This feature-rich Task Manager leverages the power of React to deliver an intuitive and dynamic user experience. Users can:
 
-Task Lists Storage: All task lists are saved inside the lists collection in Firestore. Each list document contains metadata like the list's name and the showCompleted flag which determines whether completed tasks should be shown or hidden.
+- ✅ Create unlimited task lists  
+- ✏️ Add, delete, and update tasks with priority levels (**High**, **Medium**, **Low**)  
+- ✔️ Mark tasks as complete or incomplete  
+- 🔄 Toggle views to show only completed or active tasks  
+- ⬆️ Sort tasks by priority in real-time  
+- 📁 Navigate between multiple task lists using **React Router**  
+- 🧠 Persist state and share data across components using the **Context API**  
+- 🔌 Use the app offline with **Firestore’s offline persistence**  
+- 📱 Enjoy a fully responsive layout optimized for all screen sizes and devices  
 
-Tasks per List: Each task is stored as a document inside a tasks subcollection under its respective list. Each task document includes a description, priority level, and a completed boolean status.
+---
 
-Real-Time Sync: The app uses Firestore's onSnapshot listener to sync changes in real-time. Whenever a user adds, updates, or deletes a task or a list, the UI updates instantly without the need for manual refresh.
+##  Technologies Used
 
-Offline Support: Firestore supports offline persistence automatically. This means users can continue to add or modify tasks without an internet connection, and those changes will sync automatically once the connection is restored.
+- **React**  
+  A powerful JavaScript library used for building component-based user interfaces. React was used to structure the app into reusable components, manage state, and render changes dynamically without reloading the page.
+
+- **React Router**  
+  Provides seamless client-side routing. Enables navigation between different task lists and views while maintaining a single-page application (SPA) experience.
+
+- **Firebase & Firestore**  
+  Firebase acts as the backend service. Cloud Firestore, its real-time NoSQL database, stores user data and ensures automatic synchronization between devices, with built-in support for offline access.
+
+- **Context API**  
+  React's built-in tool for managing global state. It allows components at different levels of the component tree to access shared data (like task lists) without having to pass props manually.
+
+- **Vite**  
+  A blazing-fast front-end development tool. It was used to scaffold and build the project, providing fast refresh and optimized production builds.
+
+- **HTML5 & CSS3**  
+  Used to build the layout and visual style of the app. Responsive design, flexbox/grid systems, and modern CSS techniques ensure a clean, accessible, and polished UI across all devices.
+
+---
+
+## ☁️ How Firestore is Used in the App
+
+The application integrates **Firebase’s Cloud Firestore** to manage and persist user data efficiently:
+
+### 📁 Task Lists Storage
+All task lists are stored as documents in the `lists` collection. Each document contains metadata such as:
+- List name
+- `showCompleted` flag (controls whether completed tasks are shown)
+
+### 🗂️ Tasks per List
+Each task is stored as a document inside a `tasks` subcollection under its respective list. Each task includes:
+- Description
+- Priority level (High, Medium, Low)
+- Completion status (`completed` boolean)
+
+### 🔄 Real-Time Synchronization
+The app uses Firestore's `onSnapshot` listener to receive real-time updates. Any addition, update, or deletion is immediately reflected in the UI—no manual refresh needed.
+
+### 🌐 Offline Support
+Firestore automatically enables offline persistence. Users can continue to use the app without internet access, and changes will sync automatically once the connection is restored.
+
+---
 
 Run the Development Server
 
